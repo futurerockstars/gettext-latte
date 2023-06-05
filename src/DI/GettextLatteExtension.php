@@ -2,13 +2,18 @@
 
 namespace h4kuna\Gettext\DI;
 
-use Nette\PhpGenerator,
-	Nette\DI,
-	Nette\Utils;
+use Nette\DI;
+use Nette\PhpGenerator;
+use Nette\Utils;
+use SplFileInfo;
+use function file_exists;
+use function unlink;
+use const PHP_SAPI;
 
 class GettextLatteExtension extends DI\CompilerExtension
 {
 
+	/** @var array<mixed> */
 	public $defaults = [
 		'langs' => [],
 		'dictionaryPath' => '%appDir%/../locale/',
@@ -20,8 +25,8 @@ class GettextLatteExtension extends DI\CompilerExtension
 			'de_DE' => 'German_Standard',
 			'sk_SK' => 'Slovak',
 			'cs_CZ' => 'Czech',
-			'it_IT' => 'Italian_Standard'
-		]
+			'it_IT' => 'Italian_Standard',
+		],
 	];
 
 	public function loadConfiguration()
@@ -32,6 +37,7 @@ class GettextLatteExtension extends DI\CompilerExtension
 		if (!$config['langs']) {
 			$config['langs'] = ['cs' => 'cs_CZ.utf8', 'en' => 'en_US.utf8'];
 		}
+
 		// os
 		$builder->addDefinition($this->prefix('os'))
 			->setClass('h4kuna\Gettext\Os')
@@ -61,7 +67,10 @@ class GettextLatteExtension extends DI\CompilerExtension
 			->setArguments([$builder->getDefinition('latte.templateFactory')]);
 
 		$latte = $builder->getDefinition('latte.latteFactory');
-		$latte->addSetup('?->onCompile[] = function($engine) { h4kuna\Gettext\Macros\Gettext::install($engine->getCompiler()); }', ['@self']);
+		$latte->addSetup(
+			'?->onCompile[] = function($engine) { h4kuna\Gettext\Macros\Gettext::install($engine->getCompiler()); }',
+			['@self'],
+		);
 	}
 
 	public function afterCompile(PhpGenerator\ClassType $class)
@@ -77,7 +86,7 @@ class GettextLatteExtension extends DI\CompilerExtension
 		$temp = $this->getContainerBuilder()->parameters['tempDir'] . '/cache/latte';
 		if (file_exists($temp) && $this->getContainerBuilder()->parameters['debugMode']) {
 			foreach (Utils\Finder::find('*')->in($temp) as $file) {
-				/* @var $file \SplFileInfo */
+				/** @var SplFileInfo $file */
 				@unlink($file->getPathname());
 			}
 		}

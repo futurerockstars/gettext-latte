@@ -2,18 +2,34 @@
 
 namespace h4kuna\Gettext;
 
-use Nette,
-	Nette\Http;
+use Iterator;
+use Nette;
+use Nette\Http;
+use function array_keys;
+use function call_user_func_array;
+use function defined;
+use function exec;
+use function func_get_args;
+use function function_exists;
+use function implode;
+use function key;
+use function next;
+use function preg_match;
+use function putenv;
+use function reset;
+use function setlocale;
+use function str_replace;
+use function strtolower;
+use const LC_ALL;
+use const LC_MESSAGES;
+use const PHP_SAPI;
 
-/**
- * @author Milan Matějček
- */
-class GettextSetup implements Nette\Localization\ITranslator, \Iterator
+class GettextSetup implements Nette\Localization\ITranslator, Iterator
 {
 
 	use Nette\SmartObject;
 
-	/** @var string[] */
+	/** @var array<string> */
 	private $languages;
 
 	/** @var Dictionary */
@@ -56,8 +72,9 @@ class GettextSetup implements Nette\Localization\ITranslator, \Iterator
 		if (!function_exists('bindtextdomain')) {
 			throw new GettextException('You have not instaled gettext extension.');
 		} elseif (PHP_SAPI === 'cli') {
-			putenv("LANGUAGE=");
+			putenv('LANGUAGE=');
 		}
+
 		$this->dictionary = $dictionary;
 		$this->os = $os;
 		$this->request = $request;
@@ -74,6 +91,7 @@ class GettextSetup implements Nette\Localization\ITranslator, \Iterator
 		if ($this->default) {
 			return $this->default;
 		}
+
 		$lang = $this->request->detectLanguage(array_keys($this->languages));
 		if ($lang) {
 			return $lang;
@@ -150,6 +168,7 @@ class GettextSetup implements Nette\Localization\ITranslator, \Iterator
 
 	/**
 	 * @param string $language
+	 *
 	 * @see Dictionary::download
 	 */
 	public function download($language)
@@ -160,8 +179,7 @@ class GettextSetup implements Nette\Localization\ITranslator, \Iterator
 
 	/**
 	 * @param string          $language
-	 * @param Http\FileUpload $po
-	 * @param Http\FileUpload $mo
+	 *
 	 * @see Dictionary::upload
 	 */
 	public function upload($language, Http\FileUpload $po, Http\FileUpload $mo)
@@ -219,7 +237,6 @@ class GettextSetup implements Nette\Localization\ITranslator, \Iterator
 	/**
 	 * Optional, if you set Session than enable automatic language dection.
 	 *
-	 * @param Http\Session $session
 	 * @return self
 	 */
 	public function setSession(Http\Session $session, $live = '+1 week')
@@ -234,7 +251,6 @@ class GettextSetup implements Nette\Localization\ITranslator, \Iterator
 	}
 
 	/**
-	 *
 	 * @param string $language
 	 * @throws GettextException
 	 */
@@ -270,7 +286,7 @@ class GettextSetup implements Nette\Localization\ITranslator, \Iterator
 			throw new GettextException(
 				"It seems you don't have locale '$this->language' installed."
 				. " Available locales are: '" . implode(', ', self::showAvailableLanguages()) . "'."
-				. ' Either install the required locale or link it to an existing one in your system.'
+				. ' Either install the required locale or link it to an existing one in your system.',
 			);
 		}
 	}
@@ -286,7 +302,6 @@ class GettextSetup implements Nette\Localization\ITranslator, \Iterator
 	}
 
 	/**
-	 *
 	 * @param string $message
 	 * @param mixed  $count
 	 * @return string
@@ -313,6 +328,7 @@ class GettextSetup implements Nette\Localization\ITranslator, \Iterator
 			if ($this->default === null) {
 				$this->default = $lang;
 			}
+
 			$this->languages[$lang] = $this->os->isMac() ? str_replace('utf8', 'UTF-8', $encoding) : $encoding;
 		}
 

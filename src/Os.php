@@ -2,14 +2,16 @@
 
 namespace h4kuna\Gettext;
 
-/**
- * @author Milan Matějček
- */
+use function preg_replace;
+use function strtolower;
+use function substr;
+use const PHP_OS;
+
 class Os
 {
 
 	/** OS platforms */
-	const
+	public const
 		LINUX = 'linux',
 		MAC = 'mac',
 		WINDOWS = 'windows';
@@ -28,12 +30,13 @@ class Os
 	public function getWindowsLocale($key)
 	{
 		$key = preg_replace('/\.utf8$/', '', $key);
+
 		return $this->translateLocale[self::WINDOWS][$key];
 	}
 
 	public function getOs()
 	{
-		if ($this->os !== NULL) {
+		if ($this->os !== null) {
 			return $this->os;
 		}
 
@@ -41,17 +44,23 @@ class Os
 			case 'windo':
 			case 'winnt':
 				$this->os = self::WINDOWS;
+
 				break;
 			case 'darwi':
 				$this->os = self::MAC;
+
 				break;
 			case 'linux':
 			case 'freeb':
 				$this->os = self::LINUX;
+
 				break;
 			default:
-				throw new UnsupportedOperationSystemException('Please write to autor. Your system is: "' . PHP_OS . '".');
+				throw new UnsupportedOperationSystemException(
+					'Please write to autor. Your system is: "' . PHP_OS . '".',
+				);
 		}
+
 		return $this->os;
 	}
 

@@ -2,28 +2,32 @@
 
 namespace h4kuna\Gettext\Latte;
 
-class EmptyMacro implements \Nette\Latte\IMacro
+use Latte\MacroNode;
+use Nette\Latte\IMacro;
+
+class EmptyMacro implements IMacro
 {
 
 	public function finalize()
 	{
-
+		// Noop
 	}
 
 	public function initialize()
 	{
-
+		// Noop
 	}
 
-	public function nodeClosed(\Latte\MacroNode $node)
+	public function nodeClosed(MacroNode $node)
 	{
-
+		// Noop
 	}
 
-	public function nodeOpened(\Latte\MacroNode $node)
+	public function nodeOpened(MacroNode $node)
 	{
-		$node->isEmpty = $node->closing = TRUE;
-		return TRUE;
+		$node->isEmpty = $node->closing = true;
+
+		return true;
 	}
 
 }

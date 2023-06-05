@@ -1,11 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Property h4kuna\\\\Gettext\\\\DI\\\\GettextLatteExtension\\:\\:\\$defaults has no type specified\\.$#"
-			count: 1
-			path: ../src/DI/GettextLatteExtension.php
-
-		-
 			message: "#^Method h4kuna\\\\Gettext\\\\Dictionary\\:\\:__construct\\(\\) has parameter \\$path with no type specified\\.$#"
 			count: 1
 			path: ../src/Dictionary.php
@@ -327,11 +322,6 @@ parameters:
 
 		-
 			message: "#^Method h4kuna\\\\Gettext\\\\Latte\\\\MagicObject\\:\\:__set\\(\\) with return type void returns mixed but should not return anything\\.$#"
-			count: 1
-			path: ../src/Latte/MagicObject.php
-
-		-
-			message: "#^Property h4kuna\\\\Gettext\\\\Latte\\\\MagicObject\\:\\:\\$return has no type specified\\.$#"
 			count: 1
 			path: ../src/Latte/MagicObject.php
 

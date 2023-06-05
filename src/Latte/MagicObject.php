@@ -2,15 +2,13 @@
 
 namespace h4kuna\Gettext\Latte;
 
-/**
- * @author Milan Matějček
- */
 class MagicObject
 {
 
+	/** @var mixed */
 	private $return;
 
-	public function __construct($return = NULL)
+	public function __construct($return = null)
 	{
 		$this->return = $return;
 	}

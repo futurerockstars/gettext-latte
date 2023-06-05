@@ -2,16 +2,22 @@
 
 namespace h4kuna\Gettext\Macros;
 
-use h4kuna,
-	Latte;
+use h4kuna;
+use Latte;
+use function array_slice;
+use function array_unshift;
+use function implode;
+use function preg_match;
+use function preg_replace;
+use function rtrim;
+use function strpos;
+use function substr;
+use function substr_count;
 
-/**
- * @author Milan Matějček
- */
 class Gettext extends Latte\Macros\MacroSet
 {
 
-	const GETTEXT = 'ettext';
+	public const GETTEXT = 'ettext';
 
 	/** @var string */
 	private $function;
@@ -23,16 +29,16 @@ class Gettext extends Latte\Macros\MacroSet
 	private $params;
 
 	/** @var bool */
-	private $oneParam = TRUE;
+	private $oneParam = true;
 
 	/**
 	 * Name => count of arguments
+	 *
 	 * @var array
 	 */
-	static private $functions = ['g' => 1, 'ng' => 3, 'dg' => 2, 'dng' => 4];
+	private static $functions = ['g' => 1, 'ng' => 3, 'dg' => 2, 'dng' => 4];
 
 	/**
-	 * @param Latte\Compiler $compiler
 	 * @return self
 	 */
 	public static function install(Latte\Compiler $compiler)
@@ -42,12 +48,14 @@ class Gettext extends Latte\Macros\MacroSet
 		foreach (self::$functions as $prefix => $_n) {
 			$me->addMacro($prefix . '_', [$me, self::GETTEXT]);
 		}
+
 		return $me;
 	}
 
 	public function unknown(Latte\MacroNode $node, Latte\PhpWriter $writer)
 	{
 		$node->args = $this->detectFunction($node->args);
+
 		return $this->ettext($node, $writer);
 	}
 
@@ -63,7 +71,9 @@ class Gettext extends Latte\Macros\MacroSet
 		if ($diff) {
 			$out = 'sprintf(' . $out . ', ' . implode(', ', array_slice($args, $diff)) . ')';
 		}
-		$this->function = NULL;
+
+		$this->function = null;
+
 		return $writer->write('echo %modify(' . $out . ')');
 	}
 
@@ -85,6 +95,7 @@ class Gettext extends Latte\Macros\MacroSet
 			$argsGettext[0] = $argsGettext[1];
 			$argsGettext[1] = $n;
 		}
+
 		// set another variable as plural
 		foreach ($args as $param) {
 			if (preg_match('/plural/i', $param)) {
@@ -96,6 +107,7 @@ class Gettext extends Latte\Macros\MacroSet
 		if (preg_match('/abs/i', $argsGettext[2 + $key])) {
 			$argsGettext[2 + $key] = 'abs(' . $argsGettext[2 + $key] . ')';
 		}
+
 		return $argsGettext;
 	}
 
@@ -105,7 +117,7 @@ class Gettext extends Latte\Macros\MacroSet
 			$prefix = rtrim($prefix, '_');
 			$this->function = $prefix . self::GETTEXT;
 			$this->params = self::$functions[$prefix];
-			$this->plural = strpos($prefix, 'n') !== FALSE;
+			$this->plural = strpos($prefix, 'n') !== false;
 			if ($this->plural && $this->oneParam) {
 				--$this->params;
 			}
@@ -114,22 +126,26 @@ class Gettext extends Latte\Macros\MacroSet
 
 	private function detectFunction($args)
 	{
-		if ($this->function !== NULL) {
+		if ($this->function !== null) {
 			return $args;
 		}
-		$find = NULL;
+
+		$find = null;
 		if (preg_match('/(.*)(?:"|\')/U', $args, $find) && isset(self::$functions[$find[1] . 'g'])) {
 			$this->setFunction($find[1] . 'g_');
 			if ($find[1]) {
 				return preg_replace('/^' . $find[1] . '/', '', $args);
 			}
+
 			return $args;
 		}
+
 		throw new h4kuna\Gettext\UnsupportedTranslateMacroException($args);
 	}
 
 	/**
 	 * Has term for replace?
+	 *
 	 * @param string $str
 	 * @return int
 	 */

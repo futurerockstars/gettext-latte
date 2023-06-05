@@ -2,19 +2,38 @@
 
 namespace h4kuna\Gettext;
 
-use Nette\Caching,
-	Nette\Http,
-	Nette\Utils;
+use Nette\Caching;
+use Nette\Http;
+use Nette\SmartObject;
+use Nette\Utils;
+use SplFileInfo;
+use function array_combine;
+use function array_diff;
+use function array_fill_keys;
+use function basename;
+use function bind_textdomain_codeset;
+use function bindtextdomain;
+use function count;
+use function file_exists;
+use function filesize;
+use function flush;
+use function header;
+use function implode;
+use function is_file;
+use function key;
+use function preg_match;
+use function preg_quote;
+use function readfile;
+use function realpath;
+use function textdomain;
+use const DIRECTORY_SEPARATOR;
 
-/**
- * @author Milan Matějček
- */
 class Dictionary
 {
 
-	use \Nette\SmartObject;
+	use SmartObject;
 
-	const
+	public const
 		PHP_DIR = '/LC_MESSAGES/',
 		DOMAIN = 'messages';
 
@@ -23,6 +42,7 @@ class Dictionary
 
 	/**
 	 * List of domains
+	 *
 	 * @var array
 	 */
 	private $domains = [];
@@ -44,6 +64,7 @@ class Dictionary
 
 	/**
 	 * What domain you want.
+	 *
 	 * @param string $domain
 	 * @return self
 	 * @throws GettextException
@@ -53,13 +74,16 @@ class Dictionary
 		if ($this->domain == $domain) {
 			return $this;
 		}
+
 		$this->loadDomain($domain);
 		$this->domain = textdomain($domain);
+
 		return $this;
 	}
 
 	/**
 	 * Load dictionary if not loaded.
+	 *
 	 * @param string $domain
 	 * @throws DomainDoesNotExistsException
 	 */
@@ -68,11 +92,13 @@ class Dictionary
 		if (!isset($this->domains[$domain])) {
 			throw new DomainDoesNotExistsException('This domain does not exists: ' . $domain);
 		}
-		if ($this->domains[$domain] === FALSE) {
+
+		if ($this->domains[$domain] === false) {
 			bindtextdomain($domain, $this->path);
 			bind_textdomain_codeset($domain, 'UTF-8');
-			$this->domains[$domain] = TRUE;
+			$this->domains[$domain] = true;
 		}
+
 		return $domain;
 	}
 
@@ -84,6 +110,7 @@ class Dictionary
 
 	/**
 	 * Load all dictionaries.
+	 *
 	 * @param string $default
 	 */
 	public function loadAllDomains($default)
@@ -91,11 +118,13 @@ class Dictionary
 		foreach ($this->domains as $domain => $_n) {
 			$this->loadDomain($domain);
 		}
+
 		$this->setDomain($default);
 	}
 
 	/**
 	 * Offer file download.
+	 *
 	 * @param string $language
 	 * @throws GettextException
 	 */
@@ -110,14 +139,14 @@ class Dictionary
 			readfile($file);
 			exit;
 		}
+
 		throw new GettextException('File not found: ' . $file);
 	}
 
 	/**
 	 * Save uploaded files.
+	 *
 	 * @param string $lang
-	 * @param Http\FileUpload $po
-	 * @param Http\FileUpload $mo
 	 */
 	public function upload($lang, Http\FileUpload $po, Http\FileUpload $mo)
 	{
@@ -127,6 +156,7 @@ class Dictionary
 
 	/**
 	 * Filesystem path for domain.
+	 *
 	 * @param string $lang
 	 * @param string $extension
 	 * @return string
@@ -144,19 +174,20 @@ class Dictionary
 
 	/**
 	 * Check for available domain.
+	 *
 	 * @return array
 	 */
 	private function loadDomains()
 	{
 		$this->domains = $this->cache->load(self::DOMAIN);
-		if ($this->domains !== NULL) {
+		if ($this->domains !== null) {
 			return $this->domains;
 		}
 
 		$files = $match = $domains = [];
 		$find = Utils\Finder::findFiles('*.po');
 		foreach ($find->from($this->path) as $file) {
-			/* @var $file \SplFileInfo */
+			/** @var SplFileInfo $file */
 			if (preg_match('/' . preg_quote($this->path, '/') . '(.*)(?:\\\|\/)/U', $file->getPath(), $match)) {
 				$_dictionary = $file->getBasename('.po');
 				$domains[$match[1]][$_dictionary] = $_dictionary;
@@ -170,7 +201,12 @@ class Dictionary
 			foreach ($dictionary as $value) {
 				$diff = array_diff($_domains, $value);
 				if ($diff) {
-					throw new GettextException('For this language (' . $lang . ') you have one or more different dicitonaries: ' . implode('.mo, ', $diff) . '.mo');
+					throw new GettextException(
+						'For this language (' . $lang . ') you have one or more different dicitonaries: ' . implode(
+							'.mo, ',
+							$diff,
+						) . '.mo',
+					);
 				}
 			}
 		}
@@ -180,13 +216,14 @@ class Dictionary
 			throw new GettextException('Let\'s generate *.mo files.');
 		}
 
+		$data = array_combine($_domains, array_fill_keys($_domains, false));
 
-		$data = array_combine($_domains, array_fill_keys($_domains, FALSE));
 		return $this->domains = $this->cache->save(self::DOMAIN, $data, [Caching\Cache::FILES => $files]);
 	}
 
 	/**
 	 * Check dictionary path.
+	 *
 	 * @param string $path
 	 * @throws DirectoryNotFoundException
 	 */
@@ -198,6 +235,7 @@ class Dictionary
 		}
 
 		$this->path .= DIRECTORY_SEPARATOR;
+
 		return $this;
 	}
 
