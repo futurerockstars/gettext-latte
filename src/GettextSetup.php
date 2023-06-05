@@ -39,12 +39,14 @@ class GettextSetup implements Nette\Localization\ITranslator, \Iterator
 
 	/**
 	 * Event if language set.
+	 *
 	 * @var array
 	 */
 	public $onSetLanguage;
 
 	/**
 	 * Event if language change.
+	 *
 	 * @var array
 	 */
 	public $onChangeLanguage;
@@ -64,6 +66,7 @@ class GettextSetup implements Nette\Localization\ITranslator, \Iterator
 
 	/**
 	 * Try find user language.
+	 *
 	 * @return string
 	 */
 	public function detectLanguage()
@@ -75,6 +78,7 @@ class GettextSetup implements Nette\Localization\ITranslator, \Iterator
 		if ($lang) {
 			return $lang;
 		}
+
 		return $this->getDefault();
 	}
 
@@ -86,9 +90,10 @@ class GettextSetup implements Nette\Localization\ITranslator, \Iterator
 	 */
 	public function changeHomeLang($lang)
 	{
-		if ($this->languagePrev === NULL) {
+		if ($this->languagePrev === null) {
 			$this->languagePrev = $this->getLanguage();
 		}
+
 		return $this->setLanguage($lang);
 	}
 
@@ -99,7 +104,7 @@ class GettextSetup implements Nette\Localization\ITranslator, \Iterator
 	{
 		if ($this->languagePrev) {
 			$this->setLanguage($this->languagePrev);
-			$this->languagePrev = NULL;
+			$this->languagePrev = null;
 		}
 	}
 
@@ -115,13 +120,15 @@ class GettextSetup implements Nette\Localization\ITranslator, \Iterator
 
 	/**
 	 * Actived language.
+	 *
 	 * @return string
 	 */
 	public function getLanguage()
 	{
-		if ($this->language === NULL) {
+		if ($this->language === null) {
 			$this->language = $this->getDefault();
 		}
+
 		return $this->language;
 	}
 
@@ -133,6 +140,7 @@ class GettextSetup implements Nette\Localization\ITranslator, \Iterator
 
 	/**
 	 * Load language dictionary
+	 *
 	 * @param string $domain
 	 */
 	public function loadDomain($domain)
@@ -141,8 +149,8 @@ class GettextSetup implements Nette\Localization\ITranslator, \Iterator
 	}
 
 	/**
-	 * @see Dictionary::download
 	 * @param string $language
+	 * @see Dictionary::download
 	 */
 	public function download($language)
 	{
@@ -151,10 +159,10 @@ class GettextSetup implements Nette\Localization\ITranslator, \Iterator
 	}
 
 	/**
-	 * @see Dictionary::upload
-	 * @param string $language
+	 * @param string          $language
 	 * @param Http\FileUpload $po
 	 * @param Http\FileUpload $mo
+	 * @see Dictionary::upload
 	 */
 	public function upload($language, Http\FileUpload $po, Http\FileUpload $mo)
 	{
@@ -164,6 +172,7 @@ class GettextSetup implements Nette\Localization\ITranslator, \Iterator
 
 	/**
 	 * Is active default language?
+	 *
 	 * @return bool
 	 */
 	public function isDefault()
@@ -173,6 +182,7 @@ class GettextSetup implements Nette\Localization\ITranslator, \Iterator
 
 	/**
 	 * Load all possible language dictionary
+	 *
 	 * @param string $default
 	 */
 	public function loadAllDomains($default)
@@ -202,6 +212,7 @@ class GettextSetup implements Nette\Localization\ITranslator, \Iterator
 			$this->section->language = $lang;
 			$this->onChangeLanguage($lang);
 		}
+
 		return $this->language;
 	}
 
@@ -218,6 +229,7 @@ class GettextSetup implements Nette\Localization\ITranslator, \Iterator
 			$this->setLanguage($this->detectLanguage());
 			$this->section->setExpiration($live);
 		}
+
 		return $this;
 	}
 
@@ -235,6 +247,7 @@ class GettextSetup implements Nette\Localization\ITranslator, \Iterator
 
 	/**
 	 * Load language dictionary
+	 *
 	 * @throws GettextException
 	 */
 	private function loadDictionary()
@@ -245,7 +258,7 @@ class GettextSetup implements Nette\Localization\ITranslator, \Iterator
 			putenv('LANG=' . $this->language);
 			putenv('LC_ALL=' . $this->language);
 			setlocale($constLC, $this->language);
-			$set = TRUE;
+			$set = true;
 		} elseif ($this->os->isMac()) {
 			putenv('LANG=' . $this->language);
 			$set = setlocale(LC_ALL, $this->languages[$this->language]);
@@ -254,7 +267,11 @@ class GettextSetup implements Nette\Localization\ITranslator, \Iterator
 		}
 
 		if (!$set) {
-			throw new GettextException('Probaly you have not instaled locale support on your machine. Let\'s try command: $ locale -a, or ' . __CLASS__ . '::showAvailableLanguages()');
+			throw new GettextException(
+				"It seems you don't have locale '$this->language' installed."
+				. " Available locales are: '" . implode(', ', self::showAvailableLanguages()) . "'."
+				. ' Either install the required locale or link it to an existing one in your system.'
+			);
 		}
 	}
 
@@ -271,16 +288,17 @@ class GettextSetup implements Nette\Localization\ITranslator, \Iterator
 	/**
 	 *
 	 * @param string $message
-	 * @param mixed $count
+	 * @param mixed  $count
 	 * @return string
 	 */
-	public function translate($message, $count = NULL)
+	public function translate($message, $count = null)
 	{
 		return call_user_func_array('sprintf', func_get_args());
 	}
 
 	/**
 	 * List of avaible languages
+	 *
 	 * @param array $langs
 	 * @return self
 	 */
@@ -292,21 +310,23 @@ class GettextSetup implements Nette\Localization\ITranslator, \Iterator
 
 		foreach ($langs as $lang => $encoding) {
 			$lang = strtolower($lang);
-			if ($this->default === NULL) {
+			if ($this->default === null) {
 				$this->default = $lang;
 			}
 			$this->languages[$lang] = $this->os->isMac() ? str_replace('utf8', 'UTF-8', $encoding) : $encoding;
 		}
+
 		return $this;
 	}
 
 	/**
 	 * Show you posibble languages
+	 *
 	 * @return array
 	 */
 	public static function showAvailableLanguages()
 	{
-		$return = NULL;
+		$return = null;
 		exec('locale -a', $return);
 		$out = [];
 		foreach ($return as $line) {
@@ -314,6 +334,7 @@ class GettextSetup implements Nette\Localization\ITranslator, \Iterator
 				$out[] = $line;
 			}
 		}
+
 		return $out;
 	}
 

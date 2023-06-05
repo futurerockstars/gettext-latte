@@ -10,6 +10,7 @@ Utils\FileSystem::createDir($tempDir . '/cache/latte');
 Utils\FileSystem::createDir($logDir);
 
 $configurator = new Nette\Configurator;
+$configurator->setDebugMode(true);
 $configurator->enableDebugger($logDir);
 $configurator->setTempDirectory($tempDir);
 $configurator->addConfig(__DIR__ . '/config/test.neon');
