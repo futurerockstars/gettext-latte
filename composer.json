@@ -17,7 +17,8 @@
 		"latte/latte": "^2.7.4",
 		"nette/application": "^2.4.17",
 		"nette/caching": "^2.5.9",
-		"nette/http": "^2.4.12"
+		"nette/http": "^2.4.12",
+		"nette/utils": "^2.5.7"
 	},
 	"require-dev": {
 		"nette/bootstrap": "^2.4.6",
