@@ -1,5 +1,10 @@
-nbproject/
+# IDE
+/.idea
+
+# Composer
+/vendor
+/composer.lock
+
+# Generated
+/var
 *.mo
-composer.lock
-/vendor/
-*~
