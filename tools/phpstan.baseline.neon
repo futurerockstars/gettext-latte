@@ -191,31 +191,6 @@ parameters:
 			path: ../src/GettextSetup.php
 
 		-
-			message: "#^Access to an undefined property Latte\\\\MacroNode\\:\\:\\$isEmpty\\.$#"
-			count: 1
-			path: ../src/Latte/EmptyMacro.php
-
-		-
-			message: "#^Method h4kuna\\\\Gettext\\\\Latte\\\\EmptyMacro\\:\\:finalize\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: ../src/Latte/EmptyMacro.php
-
-		-
-			message: "#^Method h4kuna\\\\Gettext\\\\Latte\\\\EmptyMacro\\:\\:initialize\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: ../src/Latte/EmptyMacro.php
-
-		-
-			message: "#^Method h4kuna\\\\Gettext\\\\Latte\\\\EmptyMacro\\:\\:nodeClosed\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: ../src/Latte/EmptyMacro.php
-
-		-
-			message: "#^Method h4kuna\\\\Gettext\\\\Latte\\\\EmptyMacro\\:\\:nodeOpened\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: ../src/Latte/EmptyMacro.php
-
-		-
 			message: "#^Method h4kuna\\\\Gettext\\\\Latte\\\\LatteCompiler\\:\\:addExclude\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: ../src/Latte/LatteCompiler.php
@@ -267,11 +242,6 @@ parameters:
 
 		-
 			message: "#^Method h4kuna\\\\Gettext\\\\Latte\\\\LatteCompiler\\:\\:run\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: ../src/Latte/LatteCompiler.php
-
-		-
-			message: "#^Parameter \\#2 \\$macro of method Latte\\\\Engine\\:\\:addMacro\\(\\) expects Latte\\\\Macro, h4kuna\\\\Gettext\\\\Latte\\\\EmptyMacro given\\.$#"
 			count: 1
 			path: ../src/Latte/LatteCompiler.php
 

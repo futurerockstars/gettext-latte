@@ -126,11 +126,6 @@ class LatteCompiler
 					throw $e;
 				}
 
-				$macroName = $find[1];
-				$this->template->getLatte()->onCompile[] = function (Latte\Engine $engine) use ($macroName) {
-					$engine->addMacro($macroName, new EmptyMacro());
-					//goto checkFile;
-				};
 				$this->skippedFiles[] = $file;
 			}
 		}
