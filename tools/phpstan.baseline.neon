@@ -1,0 +1,436 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Property h4kuna\\\\Gettext\\\\DI\\\\GettextLatteExtension\\:\\:\\$defaults has no type specified\\.$#"
+			count: 1
+			path: ../src/DI/GettextLatteExtension.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Dictionary\\:\\:__construct\\(\\) has parameter \\$path with no type specified\\.$#"
+			count: 1
+			path: ../src/Dictionary.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Dictionary\\:\\:download\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../src/Dictionary.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Dictionary\\:\\:loadAllDomains\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../src/Dictionary.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Dictionary\\:\\:loadDomain\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../src/Dictionary.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Dictionary\\:\\:loadDomains\\(\\) is unused\\.$#"
+			count: 1
+			path: ../src/Dictionary.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Dictionary\\:\\:loadDomains\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../src/Dictionary.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Dictionary\\:\\:setPath\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../src/Dictionary.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Dictionary\\:\\:upload\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../src/Dictionary.php
+
+		-
+			message: "#^Parameter \\#1 \\$domain of method h4kuna\\\\Gettext\\\\Dictionary\\:\\:loadDomain\\(\\) expects string, \\(int\\|string\\) given\\.$#"
+			count: 1
+			path: ../src/Dictionary.php
+
+		-
+			message: "#^Parameter \\#1 \\$domain of method h4kuna\\\\Gettext\\\\Dictionary\\:\\:setDomain\\(\\) expects string, \\(int\\|string\\) given\\.$#"
+			count: 1
+			path: ../src/Dictionary.php
+
+		-
+			message: "#^Property h4kuna\\\\Gettext\\\\Dictionary\\:\\:\\$domains type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../src/Dictionary.php
+
+		-
+			message: "#^Property h4kuna\\\\Gettext\\\\Dictionary\\:\\:\\$path \\(string\\) does not accept string\\|false\\.$#"
+			count: 1
+			path: ../src/Dictionary.php
+
+		-
+			message: "#^Access to an undefined property Nette\\\\Http\\\\SessionSection\\:\\:\\$language\\.$#"
+			count: 2
+			path: ../src/GettextSetup.php
+
+		-
+			message: "#^Call to an undefined method h4kuna\\\\Gettext\\\\GettextSetup\\:\\:onChangeLanguage\\(\\)\\.$#"
+			count: 1
+			path: ../src/GettextSetup.php
+
+		-
+			message: "#^Call to an undefined method h4kuna\\\\Gettext\\\\GettextSetup\\:\\:onSetLanguage\\(\\)\\.$#"
+			count: 1
+			path: ../src/GettextSetup.php
+
+		-
+			message: "#^Class h4kuna\\\\Gettext\\\\GettextSetup implements generic interface Iterator but does not specify its types\\: TKey, TValue$#"
+			count: 1
+			path: ../src/GettextSetup.php
+
+		-
+			message: "#^Left side of && is always true\\.$#"
+			count: 1
+			path: ../src/GettextSetup.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\GettextSetup\\:\\:__construct\\(\\) has parameter \\$languages with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../src/GettextSetup.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\GettextSetup\\:\\:changeHomeLang\\(\\) should return h4kuna\\\\Gettext\\\\GettextSetup but returns string\\.$#"
+			count: 1
+			path: ../src/GettextSetup.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\GettextSetup\\:\\:checkLanguage\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../src/GettextSetup.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\GettextSetup\\:\\:download\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../src/GettextSetup.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\GettextSetup\\:\\:getLanguages\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../src/GettextSetup.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\GettextSetup\\:\\:loadAllDomains\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../src/GettextSetup.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\GettextSetup\\:\\:loadDictionary\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../src/GettextSetup.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\GettextSetup\\:\\:loadDomain\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../src/GettextSetup.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\GettextSetup\\:\\:revertHomeLang\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../src/GettextSetup.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\GettextSetup\\:\\:rewind\\(\\) with return type void returns string\\|false but should not return anything\\.$#"
+			count: 1
+			path: ../src/GettextSetup.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\GettextSetup\\:\\:setLanguages\\(\\) has parameter \\$langs with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../src/GettextSetup.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\GettextSetup\\:\\:setSession\\(\\) has parameter \\$live with no type specified\\.$#"
+			count: 1
+			path: ../src/GettextSetup.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\GettextSetup\\:\\:showAvailableLanguages\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../src/GettextSetup.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\GettextSetup\\:\\:upload\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../src/GettextSetup.php
+
+		-
+			message: "#^PHPDoc tag @throws with type h4kuna\\\\Gettext\\\\RuntimeException is not subtype of Throwable$#"
+			count: 1
+			path: ../src/GettextSetup.php
+
+		-
+			message: "#^Parameter \\#1 \\$lang of method h4kuna\\\\Gettext\\\\GettextSetup\\:\\:setLanguage\\(\\) expects string, h4kuna\\\\Gettext\\\\sring given\\.$#"
+			count: 1
+			path: ../src/GettextSetup.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function strtolower expects string, \\(int\\|string\\) given\\.$#"
+			count: 1
+			path: ../src/GettextSetup.php
+
+		-
+			message: "#^Parameter \\$lang of method h4kuna\\\\Gettext\\\\GettextSetup\\:\\:changeHomeLang\\(\\) has invalid type h4kuna\\\\Gettext\\\\sring\\.$#"
+			count: 1
+			path: ../src/GettextSetup.php
+
+		-
+			message: "#^Property h4kuna\\\\Gettext\\\\GettextSetup\\:\\:\\$languagePrev \\(string\\) does not accept null\\.$#"
+			count: 1
+			path: ../src/GettextSetup.php
+
+		-
+			message: "#^Property h4kuna\\\\Gettext\\\\GettextSetup\\:\\:\\$onChangeLanguage type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../src/GettextSetup.php
+
+		-
+			message: "#^Property h4kuna\\\\Gettext\\\\GettextSetup\\:\\:\\$onSetLanguage type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../src/GettextSetup.php
+
+		-
+			message: "#^Access to an undefined property Latte\\\\MacroNode\\:\\:\\$isEmpty\\.$#"
+			count: 1
+			path: ../src/Latte/EmptyMacro.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Latte\\\\EmptyMacro\\:\\:finalize\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../src/Latte/EmptyMacro.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Latte\\\\EmptyMacro\\:\\:initialize\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../src/Latte/EmptyMacro.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Latte\\\\EmptyMacro\\:\\:nodeClosed\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../src/Latte/EmptyMacro.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Latte\\\\EmptyMacro\\:\\:nodeOpened\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../src/Latte/EmptyMacro.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Latte\\\\LatteCompiler\\:\\:addExclude\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../src/Latte/LatteCompiler.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Latte\\\\LatteCompiler\\:\\:addExclude\\(\\) has parameter \\$path with no type specified\\.$#"
+			count: 1
+			path: ../src/Latte/LatteCompiler.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Latte\\\\LatteCompiler\\:\\:addInclude\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../src/Latte/LatteCompiler.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Latte\\\\LatteCompiler\\:\\:addInclude\\(\\) has parameter \\$path with no type specified\\.$#"
+			count: 1
+			path: ../src/Latte/LatteCompiler.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Latte\\\\LatteCompiler\\:\\:addMask\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../src/Latte/LatteCompiler.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Latte\\\\LatteCompiler\\:\\:addMask\\(\\) has parameter \\$mask with no type specified\\.$#"
+			count: 1
+			path: ../src/Latte/LatteCompiler.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Latte\\\\LatteCompiler\\:\\:clearTemp\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../src/Latte/LatteCompiler.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Latte\\\\LatteCompiler\\:\\:getTemp\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../src/Latte/LatteCompiler.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Latte\\\\LatteCompiler\\:\\:getTemplate\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../src/Latte/LatteCompiler.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Latte\\\\LatteCompiler\\:\\:prepareFiles\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../src/Latte/LatteCompiler.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Latte\\\\LatteCompiler\\:\\:run\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../src/Latte/LatteCompiler.php
+
+		-
+			message: "#^Parameter \\#2 \\$macro of method Latte\\\\Engine\\:\\:addMacro\\(\\) expects Latte\\\\Macro, h4kuna\\\\Gettext\\\\Latte\\\\EmptyMacro given\\.$#"
+			count: 1
+			path: ../src/Latte/LatteCompiler.php
+
+		-
+			message: "#^Property h4kuna\\\\Gettext\\\\Latte\\\\LatteCompiler\\:\\:\\$mask type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../src/Latte/LatteCompiler.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Latte\\\\MagicObject\\:\\:__call\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../src/Latte/MagicObject.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Latte\\\\MagicObject\\:\\:__call\\(\\) has parameter \\$arguments with no type specified\\.$#"
+			count: 1
+			path: ../src/Latte/MagicObject.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Latte\\\\MagicObject\\:\\:__call\\(\\) has parameter \\$name with no type specified\\.$#"
+			count: 1
+			path: ../src/Latte/MagicObject.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Latte\\\\MagicObject\\:\\:__construct\\(\\) has parameter \\$return with no type specified\\.$#"
+			count: 1
+			path: ../src/Latte/MagicObject.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Latte\\\\MagicObject\\:\\:__get\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../src/Latte/MagicObject.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Latte\\\\MagicObject\\:\\:__get\\(\\) has parameter \\$name with no type specified\\.$#"
+			count: 1
+			path: ../src/Latte/MagicObject.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Latte\\\\MagicObject\\:\\:__set\\(\\) has parameter \\$name with no type specified\\.$#"
+			count: 1
+			path: ../src/Latte/MagicObject.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Latte\\\\MagicObject\\:\\:__set\\(\\) has parameter \\$value with no type specified\\.$#"
+			count: 1
+			path: ../src/Latte/MagicObject.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Latte\\\\MagicObject\\:\\:__set\\(\\) with return type void returns mixed but should not return anything\\.$#"
+			count: 1
+			path: ../src/Latte/MagicObject.php
+
+		-
+			message: "#^Property h4kuna\\\\Gettext\\\\Latte\\\\MagicObject\\:\\:\\$return has no type specified\\.$#"
+			count: 1
+			path: ../src/Latte/MagicObject.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Macros\\\\Gettext\\:\\:detectFunction\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../src/Macros/Gettext.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Macros\\\\Gettext\\:\\:detectFunction\\(\\) has parameter \\$args with no type specified\\.$#"
+			count: 1
+			path: ../src/Macros/Gettext.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Macros\\\\Gettext\\:\\:ettext\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../src/Macros/Gettext.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Macros\\\\Gettext\\:\\:getGettextArgs\\(\\) has parameter \\$args with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../src/Macros/Gettext.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Macros\\\\Gettext\\:\\:getGettextArgs\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../src/Macros/Gettext.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Macros\\\\Gettext\\:\\:setFunction\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../src/Macros/Gettext.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Macros\\\\Gettext\\:\\:setFunction\\(\\) has parameter \\$prefix with no type specified\\.$#"
+			count: 1
+			path: ../src/Macros/Gettext.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Macros\\\\Gettext\\:\\:unknown\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../src/Macros/Gettext.php
+
+		-
+			message: "#^Property h4kuna\\\\Gettext\\\\Macros\\\\Gettext\\:\\:\\$function \\(string\\) does not accept null\\.$#"
+			count: 1
+			path: ../src/Macros/Gettext.php
+
+		-
+			message: "#^Property h4kuna\\\\Gettext\\\\Macros\\\\Gettext\\:\\:\\$functions type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../src/Macros/Gettext.php
+
+		-
+			message: "#^Property h4kuna\\\\Gettext\\\\Macros\\\\Gettext\\:\\:\\$params \\(int\\) does not accept \\(float\\|int\\)\\.$#"
+			count: 1
+			path: ../src/Macros/Gettext.php
+
+		-
+			message: "#^Unsafe usage of new static\\(\\)\\.$#"
+			count: 1
+			path: ../src/Macros/Gettext.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Os\\:\\:__construct\\(\\) has parameter \\$winLocaleTranslate with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../src/Os.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Os\\:\\:getOs\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../src/Os.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Os\\:\\:getWindowsLocale\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../src/Os.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Os\\:\\:getWindowsLocale\\(\\) has parameter \\$key with no type specified\\.$#"
+			count: 1
+			path: ../src/Os.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Os\\:\\:isLinux\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../src/Os.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Os\\:\\:isMac\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../src/Os.php
+
+		-
+			message: "#^Method h4kuna\\\\Gettext\\\\Os\\:\\:isWindows\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../src/Os.php
+
+		-
+			message: "#^Property h4kuna\\\\Gettext\\\\Os\\:\\:\\$translateLocale type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../src/Os.php

@@ -17,3 +17,6 @@ parameters:
 		check:
 			#missingCheckedExceptionInThrows: true
 			tooWideThrowType: true
+
+	excludePaths:
+		- ../tests/temp
