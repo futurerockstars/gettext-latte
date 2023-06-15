@@ -15,15 +15,15 @@
 		"php": ">=7.4.0 <8.0.0",
 		"h4kuna/latte-php-tokenizer": "^1.0.0",
 		"latte/latte": "^2.7.4",
-		"nette/application": "^2.4.17",
-		"nette/caching": "^2.5.9",
-		"nette/http": "^2.4.12",
-		"nette/utils": "^2.5.7",
-		"nette/finder": "^2.6.0",
-		"nette/di": "^2.4.17"
+		"nette/application": "^3.1.11",
+		"nette/caching": "^3.1.4",
+		"nette/http": "^3.2.2",
+		"nette/utils": "^3.2.9|^4.0.0",
+		"nette/finder": "^2.6.0|^3.0.0",
+		"nette/di": "^3.0.16"
 	},
 	"require-dev": {
-		"nette/bootstrap": "^2.4.6",
+		"nette/bootstrap": "^3.1.4",
 		"tracy/tracy": "^2.6.8",
 		"nette/tester": "^2.4.3",
 		"orisai/coding-standard": "^3.7.0",

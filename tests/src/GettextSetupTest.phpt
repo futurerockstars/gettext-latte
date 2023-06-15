@@ -22,8 +22,7 @@ class GettextSetupTest extends \Tester\TestCase
 
 	public function setUp()
 	{
-		$factory = $this->factory;
-		$this->gettext = $factory();
+		$this->gettext = ($this->factory)();
 	}
 
 	public function testDefault()

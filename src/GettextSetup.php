@@ -5,6 +5,7 @@ namespace h4kuna\Gettext;
 use Iterator;
 use Nette;
 use Nette\Http;
+use Nette\Localization\Translator;
 use function array_keys;
 use function call_user_func_array;
 use function defined;
@@ -24,12 +25,12 @@ use const LC_ALL;
 use const LC_MESSAGES;
 use const PHP_SAPI;
 
-class GettextSetup implements Nette\Localization\ITranslator, Iterator
+class GettextSetup implements Translator, Iterator
 {
 
 	use Nette\SmartObject;
 
-	/** @var array<string> */
+	/** @var array<string, string> */
 	private $languages;
 
 	/** @var Dictionary */
@@ -301,12 +302,7 @@ class GettextSetup implements Nette\Localization\ITranslator, Iterator
 		return implode('|', array_keys($this->languages));
 	}
 
-	/**
-	 * @param string $message
-	 * @param mixed  $count
-	 * @return string
-	 */
-	public function translate($message, $count = null)
+	public function translate($message, ...$parameters): string
 	{
 		return call_user_func_array('sprintf', func_get_args());
 	}

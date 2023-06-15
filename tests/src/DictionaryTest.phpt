@@ -22,8 +22,7 @@ class DictionaryTest extends \Tester\TestCase
 
 	public function setUp()
 	{
-		$factory = $this->factory;
-		$this->dictionary = $factory();
+		$this->dictionary = ($this->factory)();
 	}
 
 	public function testExistsFiles()
