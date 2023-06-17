@@ -1,6 +1,21 @@
 parameters:
 	ignoreErrors:
 		-
+			message: "#^Loose comparison via \"\\!\\=\" is not allowed\\.$#"
+			count: 1
+			path: ../src/DI/GettextLatteExtension.php
+
+		-
+			message: "#^Only booleans are allowed in an if condition, mixed given\\.$#"
+			count: 1
+			path: ../src/DI/GettextLatteExtension.php
+
+		-
+			message: "#^Loose comparison via \"\\=\\=\" is not allowed\\.$#"
+			count: 1
+			path: ../src/Dictionary.php
+
+		-
 			message: "#^Method h4kuna\\\\Gettext\\\\Dictionary\\:\\:__construct\\(\\) has parameter \\$path with no type specified\\.$#"
 			count: 1
 			path: ../src/Dictionary.php
@@ -41,12 +56,35 @@ parameters:
 			path: ../src/Dictionary.php
 
 		-
+			message: "#^Only booleans are allowed in a negated boolean, string\\|false given\\.$#"
+			count: 1
+			path: ../src/Dictionary.php
+
+		-
+			message: "#^Only booleans are allowed in an if condition, array\\<string, string\\> given\\.$#"
+			count: 1
+			path: ../src/Dictionary.php
+
+		-
+			message: "#^Only booleans are allowed in an if condition, int\\|false given\\.$#"
+			count: 1
+			path: ../src/Dictionary.php
+
+		-
 			message: "#^Parameter \\#1 \\$domain of method h4kuna\\\\Gettext\\\\Dictionary\\:\\:loadDomain\\(\\) expects string, \\(int\\|string\\) given\\.$#"
 			count: 1
 			path: ../src/Dictionary.php
 
 		-
 			message: "#^Parameter \\#1 \\$domain of method h4kuna\\\\Gettext\\\\Dictionary\\:\\:setDomain\\(\\) expects string, \\(int\\|string\\) given\\.$#"
+			count: 1
+			path: ../src/Dictionary.php
+
+		-
+			message: """
+				#^Parameter \\$storage of method h4kuna\\\\Gettext\\\\Dictionary\\:\\:__construct\\(\\) has typehint with deprecated interface Nette\\\\Caching\\\\IStorage\\:
+				use Nette\\\\Caching\\\\Storage$#
+			"""
 			count: 1
 			path: ../src/Dictionary.php
 
@@ -61,27 +99,22 @@ parameters:
 			path: ../src/Dictionary.php
 
 		-
-			message: "#^Access to an undefined property Nette\\\\Http\\\\SessionSection\\:\\:\\$language\\.$#"
-			count: 2
-			path: ../src/GettextSetup.php
-
-		-
-			message: "#^Call to an undefined method h4kuna\\\\Gettext\\\\GettextSetup\\:\\:onChangeLanguage\\(\\)\\.$#"
-			count: 1
-			path: ../src/GettextSetup.php
-
-		-
-			message: "#^Call to an undefined method h4kuna\\\\Gettext\\\\GettextSetup\\:\\:onSetLanguage\\(\\)\\.$#"
-			count: 1
-			path: ../src/GettextSetup.php
-
-		-
 			message: "#^Class h4kuna\\\\Gettext\\\\GettextSetup implements generic interface Iterator but does not specify its types\\: TKey, TValue$#"
 			count: 1
 			path: ../src/GettextSetup.php
 
 		-
 			message: "#^Left side of && is always true\\.$#"
+			count: 1
+			path: ../src/GettextSetup.php
+
+		-
+			message: "#^Loose comparison via \"\\!\\=\" is not allowed\\.$#"
+			count: 1
+			path: ../src/GettextSetup.php
+
+		-
+			message: "#^Loose comparison via \"\\=\\=\" is not allowed\\.$#"
 			count: 1
 			path: ../src/GettextSetup.php
 
@@ -152,6 +185,41 @@ parameters:
 
 		-
 			message: "#^Method h4kuna\\\\Gettext\\\\GettextSetup\\:\\:upload\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../src/GettextSetup.php
+
+		-
+			message: "#^Only booleans are allowed in &&, Nette\\\\Http\\\\SessionSection given on the left side\\.$#"
+			count: 1
+			path: ../src/GettextSetup.php
+
+		-
+			message: "#^Only booleans are allowed in a negated boolean, array given\\.$#"
+			count: 1
+			path: ../src/GettextSetup.php
+
+		-
+			message: "#^Only booleans are allowed in a negated boolean, bool\\|string given\\.$#"
+			count: 1
+			path: ../src/GettextSetup.php
+
+		-
+			message: "#^Only booleans are allowed in a ternary operator condition, string given\\.$#"
+			count: 1
+			path: ../src/GettextSetup.php
+
+		-
+			message: "#^Only booleans are allowed in an if condition, int\\|false given\\.$#"
+			count: 1
+			path: ../src/GettextSetup.php
+
+		-
+			message: "#^Only booleans are allowed in an if condition, string given\\.$#"
+			count: 2
+			path: ../src/GettextSetup.php
+
+		-
+			message: "#^Only booleans are allowed in an if condition, string\\|null given\\.$#"
 			count: 1
 			path: ../src/GettextSetup.php
 
@@ -246,6 +314,21 @@ parameters:
 			path: ../src/Latte/LatteCompiler.php
 
 		-
+			message: "#^Only booleans are allowed in a negated boolean, array\\<SplFileInfo\\> given\\.$#"
+			count: 1
+			path: ../src/Latte/LatteCompiler.php
+
+		-
+			message: "#^Only booleans are allowed in a negated boolean, int\\|false given\\.$#"
+			count: 1
+			path: ../src/Latte/LatteCompiler.php
+
+		-
+			message: "#^Only booleans are allowed in an if condition, array\\<SplFileInfo\\> given\\.$#"
+			count: 2
+			path: ../src/Latte/LatteCompiler.php
+
+		-
 			message: "#^Property h4kuna\\\\Gettext\\\\Latte\\\\LatteCompiler\\:\\:\\$mask type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: ../src/Latte/LatteCompiler.php
@@ -296,6 +379,11 @@ parameters:
 			path: ../src/Latte/MagicObject.php
 
 		-
+			message: "#^Loose comparison via \"\\=\\=\" is not allowed\\.$#"
+			count: 2
+			path: ../src/Macros/Gettext.php
+
+		-
 			message: "#^Method h4kuna\\\\Gettext\\\\Macros\\\\Gettext\\:\\:detectFunction\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: ../src/Macros/Gettext.php
@@ -332,6 +420,31 @@ parameters:
 
 		-
 			message: "#^Method h4kuna\\\\Gettext\\\\Macros\\\\Gettext\\:\\:unknown\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../src/Macros/Gettext.php
+
+		-
+			message: "#^Only booleans are allowed in &&, int\\|false given on the left side\\.$#"
+			count: 1
+			path: ../src/Macros/Gettext.php
+
+		-
+			message: "#^Only booleans are allowed in a negated boolean, string given\\.$#"
+			count: 1
+			path: ../src/Macros/Gettext.php
+
+		-
+			message: "#^Only booleans are allowed in an if condition, int given\\.$#"
+			count: 1
+			path: ../src/Macros/Gettext.php
+
+		-
+			message: "#^Only booleans are allowed in an if condition, int\\|false given\\.$#"
+			count: 2
+			path: ../src/Macros/Gettext.php
+
+		-
+			message: "#^Only booleans are allowed in an if condition, string given\\.$#"
 			count: 1
 			path: ../src/Macros/Gettext.php
 
