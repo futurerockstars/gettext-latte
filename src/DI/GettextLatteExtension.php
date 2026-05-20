@@ -37,7 +37,7 @@ class GettextLatteExtension extends DI\CompilerExtension
 			'dictionaryPath' => Expect::string("$this->appDir/../locale/"),
 			'session' => Expect::anyOf(Expect::string(), false)->default('+1 week'),
 			'loadAllDomains' => Expect::string('messages'),
-			'tempDir' => Expect::anyOf(Expect::string(), null)->default(null),
+			'tempDir' => Expect::string()->required(),
 			'localeTranslate' => Expect::array([
 				'en_US' => 'English_United_States',
 				'en_EN' => 'English_United_Kingdom',
