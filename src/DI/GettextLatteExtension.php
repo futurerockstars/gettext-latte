@@ -37,6 +37,7 @@ class GettextLatteExtension extends DI\CompilerExtension
 			'dictionaryPath' => Expect::string("$this->appDir/../locale/"),
 			'session' => Expect::anyOf(Expect::string(), false)->default('+1 week'),
 			'loadAllDomains' => Expect::string('messages'),
+			'tempDir' => Expect::string()->required(),
 			'localeTranslate' => Expect::array([
 				'en_US' => 'English_United_States',
 				'en_EN' => 'English_United_Kingdom',
@@ -62,7 +63,7 @@ class GettextLatteExtension extends DI\CompilerExtension
 		// dictionary
 		$builder->addDefinition($this->prefix('dictionary'))
 			->setFactory(Dictionary::class)
-			->setArguments([$config['dictionaryPath'], '@cache.storage']);
+			->setArguments([$config['dictionaryPath'], '@cache.storage', $config['tempDir']]);
 
 		// setup
 		$gettext = $builder->addDefinition($this->prefix('gettext'))

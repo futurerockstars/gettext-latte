@@ -13,19 +13,25 @@ use function array_fill_keys;
 use function basename;
 use function bind_textdomain_codeset;
 use function bindtextdomain;
+use function copy;
 use function count;
 use function file_exists;
+use function filemtime;
 use function filesize;
 use function flush;
+use function glob;
 use function header;
 use function implode;
+use function is_dir;
 use function is_file;
 use function key;
+use function max;
 use function preg_match;
 use function preg_quote;
 use function readfile;
 use function realpath;
 use function textdomain;
+use function unlink;
 use const DIRECTORY_SEPARATOR;
 
 class Dictionary
@@ -53,10 +59,29 @@ class Dictionary
 	/** @var Caching\Cache */
 	private $cache;
 
-	public function __construct($path, Caching\IStorage $storage)
+	/**
+	 * Writable directory where versioned *.mo copies are placed when
+	 * native gettext in-memory cache busting is enabled. Null = disabled.
+	 *
+	 * @var string|null
+	 */
+	private $tempPath;
+
+	/**
+	 * Logical domain name => physical (versioned) domain name actually bound
+	 * to gettext. Only populated when $tempPath is set.
+	 *
+	 * @var array<string, string>
+	 */
+	private $physicalDomains = [];
+
+	public function __construct($path, Caching\IStorage $storage, ?string $tempDir = null)
 	{
 		$this->cache = new Caching\Cache($storage, 'h4kuna.gettext.dictionary');
 		$this->setPath($path)->loadDomains();
+		if ($tempDir !== null) {
+			$this->setupVersionedDomains($tempDir);
+		}
 		if (count($this->domains) === 1) {
 			$this->setDomain(key($this->domains));
 		}
@@ -76,7 +101,8 @@ class Dictionary
 		}
 
 		$this->loadDomain($domain);
-		$this->domain = textdomain($domain);
+		textdomain($this->physicalDomains[$domain] ?? $domain);
+		$this->domain = $domain;
 
 		return $this;
 	}
@@ -94,8 +120,13 @@ class Dictionary
 		}
 
 		if ($this->domains[$domain] === false) {
-			bindtextdomain($domain, $this->path);
-			bind_textdomain_codeset($domain, 'UTF-8');
+			if (isset($this->physicalDomains[$domain])) {
+				bindtextdomain($this->physicalDomains[$domain], $this->tempPath);
+				bind_textdomain_codeset($this->physicalDomains[$domain], 'UTF-8');
+			} else {
+				bindtextdomain($domain, $this->path);
+				bind_textdomain_codeset($domain, 'UTF-8');
+			}
 			$this->domains[$domain] = true;
 		}
 
@@ -219,6 +250,95 @@ class Dictionary
 		$data = array_combine($_domains, array_fill_keys($_domains, false));
 
 		return $this->domains = $this->cache->save(self::DOMAIN, $data, [Caching\Cache::FILES => $files]);
+	}
+
+	/**
+	 * Native gettext caches *.mo files per (domain, locale) in process memory
+	 * for the whole lifetime of the worker. Editing a *.mo on disk does NOT
+	 * invalidate that cache, so translation updates only become visible after
+	 * a process restart.
+	 *
+	 * Workaround: derive a version suffix from each *.mo file's mtime, copy
+	 * the *.mo files into a writable temp tree under a versioned domain name,
+	 * and bind/textdomain to that versioned name. When a *.mo changes on disk
+	 * the version suffix changes too, so gettext sees a fresh domain and
+	 * reloads the file - no restart needed.
+	 *
+	 * @throws DirectoryNotFoundException
+	 */
+	private function setupVersionedDomains(string $tempDir): void
+	{
+		Utils\FileSystem::createDir($tempDir);
+		$resolved = realpath($tempDir);
+		if ($resolved === false) {
+			throw new DirectoryNotFoundException($tempDir);
+		}
+		$this->tempPath = $resolved . DIRECTORY_SEPARATOR;
+
+		foreach (array_keys($this->domains) as $domain) {
+			$version = $this->computeDomainVersion($domain);
+			if ($version === null) {
+				continue;
+			}
+			$physical = $domain . '_v' . $version;
+			$this->materializeVersionedCopies($domain, $physical);
+			$this->physicalDomains[$domain] = $physical;
+		}
+	}
+
+	/**
+	 * @return int|null Max mtime across all per-language *.mo files of $domain,
+	 *                  or null if no *.mo files were found.
+	 */
+	private function computeDomainVersion(string $domain): ?int
+	{
+		$mtime = null;
+		foreach ($this->listLanguageDirs() as $langDir) {
+			$mo = $langDir . self::PHP_DIR . $domain . '.mo';
+			if (is_file($mo)) {
+				$current = filemtime($mo);
+				$mtime = $mtime === null ? $current : max($mtime, $current);
+			}
+		}
+		return $mtime;
+	}
+
+	private function materializeVersionedCopies(string $domain, string $physical): void
+	{
+		foreach ($this->listLanguageDirs() as $langDir) {
+			$src = $langDir . self::PHP_DIR . $domain . '.mo';
+			if (!is_file($src)) {
+				continue;
+			}
+
+			$lang = basename($langDir);
+			$targetDir = $this->tempPath . $lang . self::PHP_DIR;
+			Utils\FileSystem::createDir($targetDir);
+			$target = $targetDir . $physical . '.mo';
+
+			if (is_file($target)) {
+				continue;
+			}
+
+			foreach (glob($targetDir . $domain . '_v*.mo') ?: [] as $old) {
+				@unlink($old);
+			}
+			copy($src, $target);
+		}
+	}
+
+	/**
+	 * @return iterable<string> Absolute paths to per-language directories
+	 *                          (e.g. /path/to/locale/cs).
+	 */
+	private function listLanguageDirs(): iterable
+	{
+		foreach (new \DirectoryIterator($this->path) as $entry) {
+			if ($entry->isDot() || !$entry->isDir()) {
+				continue;
+			}
+			yield $entry->getPathname();
+		}
 	}
 
 	/**
