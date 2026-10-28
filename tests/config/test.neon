@@ -13,6 +13,7 @@ gettextLatteExtension:
 	#langs: # default is cs and en
 
 	dictionaryPath: %appDir%/locale
+	tempDir: %tempDir%/gettext
 	session: FALSE #default is ON
 
 services:

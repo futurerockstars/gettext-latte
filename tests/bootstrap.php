@@ -8,8 +8,10 @@ include __DIR__ . '/../vendor/autoload.php';
 
 $tempDir = __DIR__ . '/temp';
 $logDir = $tempDir . '/log';
-Utils\FileSystem::createDir($tempDir . '/cache/latte');
-Utils\FileSystem::createDir($logDir);
+// One level at a time: parallel test processes race on a recursive mkdir
+foreach ([$tempDir . '/cache', $tempDir . '/cache/latte', $logDir] as $dir) {
+	Utils\FileSystem::createDir($dir);
+}
 
 $configurator = new Configurator();
 $configurator->setDebugMode(true);
