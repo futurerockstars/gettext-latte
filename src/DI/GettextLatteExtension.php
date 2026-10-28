@@ -38,6 +38,7 @@ class GettextLatteExtension extends DI\CompilerExtension
 			'session' => Expect::anyOf(Expect::string(), false)->default('+1 week'),
 			'loadAllDomains' => Expect::string('messages'),
 			'tempDir' => Expect::string()->required(),
+			'latteTempDir' => Expect::string()->nullable(),
 			'localeTranslate' => Expect::array([
 				'en_US' => 'English_United_States',
 				'en_EN' => 'English_United_Kingdom',
@@ -101,8 +102,9 @@ class GettextLatteExtension extends DI\CompilerExtension
 		 * let's clear temp directory
 		 * _Nette.FileTemplate
 		 */
-		$temp = $this->getContainerBuilder()->parameters['tempDir'] . '/cache/latte';
-		if (file_exists($temp) && $this->getContainerBuilder()->parameters['debugMode']) {
+		$parameters = $this->getContainerBuilder()->parameters;
+		$temp = $this->config['latteTempDir'] ?? $parameters['tempDir'] . '/cache/latte';
+		if (file_exists($temp) && $parameters['debugMode']) {
 			foreach (Utils\Finder::find('*')->in($temp) as $file) {
 				/** @var SplFileInfo $file */
 				@unlink($file->getPathname());

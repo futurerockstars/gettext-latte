@@ -313,6 +313,8 @@ class Dictionary
 
 			$lang = basename($langDir);
 			$targetDir = $this->tempPath . $lang . self::PHP_DIR;
+			// One level at a time: concurrent processes race on a recursive mkdir
+			Utils\FileSystem::createDir($this->tempPath . $lang);
 			Utils\FileSystem::createDir($targetDir);
 			$target = $targetDir . $physical . '.mo';
 
