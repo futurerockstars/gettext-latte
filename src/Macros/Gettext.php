@@ -74,7 +74,7 @@ class Gettext extends Latte\Macros\MacroSet
 
 		$this->function = null;
 
-		return $writer->write('echo %modify(' . $out . ')');
+		return $writer->write('echo %modify(' . $out . ') %node.line');
 	}
 
 	/**
