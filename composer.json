@@ -13,7 +13,7 @@
 	],
 	"require": {
 		"php": ">=7.4.0 <8.0.0",
-		"h4kuna/latte-php-tokenizer": "^1.0.0",
+		"futurerockstars/latte-php-tokenizer": "dev-master",
 		"latte/latte": "^2.7.4",
 		"nette/application": "^3.1.11",
 		"nette/caching": "^3.1.4",
